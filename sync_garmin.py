@@ -40,7 +40,6 @@ def build_category_metrics(activities, today, start_of_week, weekly_target):
         if act_date >= start_of_week:
             week_distance_meters += act.get("distance", 0.0)
 
-    # 14-day history array (oldest to newest)
     matrix = []
     for i in range(13, -1, -1):
         day = today - timedelta(days=i)
@@ -49,7 +48,6 @@ def build_category_metrics(activities, today, start_of_week, weekly_target):
             "active": (day in active_dates)
         })
 
-    # Consecutive streak count
     streak = 0
     check_day = today
     if check_day not in active_dates:
@@ -58,7 +56,6 @@ def build_category_metrics(activities, today, start_of_week, weekly_target):
         streak += 1
         check_day -= timedelta(days=1)
 
-    # Latest activity details
     latest = None
     if activities:
         recent = activities[0]
@@ -87,6 +84,7 @@ def build_category_metrics(activities, today, start_of_week, weekly_target):
         clean_type = type_raw.replace("_", " ").title() if type_raw else "Activity"
 
         latest = {
+            "activityId": str(recent.get("activityId", "")),
             "name": recent.get("activityName", clean_type),
             "type": clean_type,
             "relativeDate": rel_date,
@@ -108,6 +106,46 @@ def build_category_metrics(activities, today, start_of_week, weekly_target):
         "latest": latest
     }
 
+def build_activity_index(activities):
+    index = {}
+    for act in activities:
+        act_id = str(act.get("activityId", ""))
+        if not act_id:
+            continue
+
+        dist_m = act.get("distance", 0.0)
+        dist_mi = dist_m / 1609.34
+        dur_sec = act.get("duration", 0.0)
+        avg_speed = act.get("averageSpeed", 0.0)
+        avg_hr = act.get("averageHR", 0)
+        elev_m = act.get("elevationGain", 0.0)
+        elev_ft = int(elev_m * 3.28084) if elev_m else 0
+
+        type_raw = act.get("activityType", {}).get("typeKey", "")
+        clean_type = type_raw.replace("_", " ").title() if type_raw else "Run"
+
+        start_str = act.get("startTimeGMT", "")
+        formatted_date = start_str
+        if start_str:
+            try:
+                dt = datetime.strptime(start_str, "%Y-%m-%d %H:%M:%S")
+                formatted_date = dt.strftime("%d %b %Y")
+            except Exception:
+                pass
+
+        index[act_id] = {
+            "id": act_id,
+            "name": act.get("activityName", clean_type),
+            "type": clean_type,
+            "date": formatted_date,
+            "distanceMiles": round(dist_mi, 2),
+            "pace": format_pace(avg_speed),
+            "duration": format_duration(dur_sec),
+            "avgHr": int(avg_hr) if avg_hr else "N/A",
+            "elevationGainFt": elev_ft
+        }
+    return index
+
 def main():
     email = os.environ.get("GARMIN_EMAIL")
     password = os.environ.get("GARMIN_PASSWORD")
@@ -127,7 +165,6 @@ def main():
 
     activities = garmin.get_activities(0, 50)
 
-    # Filter into the two distinct buckets
     runs = [
         act for act in activities 
         if act.get("activityType", {}).get("typeKey", "").lower() in RUN_TYPES
@@ -144,6 +181,7 @@ def main():
     stats_payload = {
         "runs": build_category_metrics(runs, today, start_of_week, run_target),
         "walks": build_category_metrics(walks, today, start_of_week, walk_target),
+        "activities": build_activity_index(activities),
         "lastSynced": now.isoformat()
     }
 
@@ -151,7 +189,7 @@ def main():
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(stats_payload, f, indent=2)
 
-    print(f"Stats written to {output_path} successfully.")
+    print(f"Stats and activity index written to {output_path} successfully.")
 
 if __name__ == "__main__":
     main()
