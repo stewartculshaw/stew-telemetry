@@ -6,60 +6,79 @@
     "weeklyPct": 21,
     "streakMatrix": [
       {
+        "date": "2026-10-12",
+        "active": false,
+        "isToday": false
+      },
+      {
         "date": "2026-10-13",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-14",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-15",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-16",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-17",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-18",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-19",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-20",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-21",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-22",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-23",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-24",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-25",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-26",
-        "active": true
+        "active": true,
+        "isToday": true
       }
     ],
     "latest": {
@@ -80,60 +99,79 @@
     "weeklyPct": 0,
     "streakMatrix": [
       {
+        "date": "2026-10-12",
+        "active": false,
+        "isToday": false
+      },
+      {
         "date": "2026-10-13",
-        "active": true
+        "active": true,
+        "isToday": false
       },
       {
         "date": "2026-10-14",
-        "active": true
+        "active": true,
+        "isToday": false
       },
       {
         "date": "2026-10-15",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-16",
-        "active": true
+        "active": true,
+        "isToday": false
       },
       {
         "date": "2026-10-17",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-18",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-19",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-20",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-21",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-22",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-23",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-24",
-        "active": false
+        "active": false,
+        "isToday": false
       },
       {
         "date": "2026-10-25",
-        "active": true
+        "active": true,
+        "isToday": false
       },
       {
         "date": "2026-10-26",
-        "active": false
+        "active": false,
+        "isToday": true
       }
     ],
     "latest": {
@@ -699,5 +737,5 @@
       "elevationGainFt": 126
     }
   },
-  "lastSynced": "2026-10-26T16:45:03.794392+00:00"
+  "lastSynced": "2026-10-26T17:01:51.406568+00:00"
 }
