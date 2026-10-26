@@ -7,6 +7,8 @@ RUN_TYPES = {"running", "trail_running", "treadmill_running"}
 WALK_TYPES = {"walking", "hiking"}
 
 def format_duration(seconds):
+    if not seconds or seconds <= 0:
+        return "0:00"
     mins = int(seconds // 60)
     secs = int(seconds % 60)
     return f"{mins}:{secs:02d}"
@@ -27,8 +29,11 @@ def build_category_metrics(activities, today, start_of_week, weekly_target):
         start_str = act.get("startTimeGMT")
         if not start_str:
             continue
-        act_dt = datetime.strptime(start_str, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
-        act_date = act_dt.date()
+        try:
+            act_dt = datetime.strptime(start_str, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
+            act_date = act_dt.date()
+        except Exception:
+            continue
 
         active_dates.add(act_date)
 
@@ -41,7 +46,7 @@ def build_category_metrics(activities, today, start_of_week, weekly_target):
         day = today - timedelta(days=i)
         matrix.append({
             "date": day.isoformat(),
-            "active": day in active_dates
+            "active": (day in active_dates)
         })
 
     # Consecutive streak count
@@ -64,17 +69,22 @@ def build_category_metrics(activities, today, start_of_week, weekly_target):
         avg_hr = recent.get("averageHR", 0)
 
         start_str = recent.get("startTimeGMT")
-        act_dt = datetime.strptime(start_str, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
-        diff_days = (today - act_dt.date()).days
-        if diff_days == 0:
-            rel_date = "Today"
-        elif diff_days == 1:
-            rel_date = "Yesterday"
-        else:
-            rel_date = f"{diff_days} days ago"
+        rel_date = "Recent"
+        if start_str:
+            try:
+                act_dt = datetime.strptime(start_str, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
+                diff_days = (today - act_dt.date()).days
+                if diff_days == 0:
+                    rel_date = "Today"
+                elif diff_days == 1:
+                    rel_date = "Yesterday"
+                else:
+                    rel_date = f"{diff_days} days ago"
+            except Exception:
+                pass
 
         type_raw = recent.get("activityType", {}).get("typeKey", "")
-        clean_type = type_raw.replace("_", " ").title()
+        clean_type = type_raw.replace("_", " ").title() if type_raw else "Activity"
 
         latest = {
             "name": recent.get("activityName", clean_type),
@@ -93,4 +103,55 @@ def build_category_metrics(activities, today, start_of_week, weekly_target):
         "streakDays": streak,
         "weeklyMiles": weekly_miles,
         "weeklyTarget": weekly_target,
-        "weeklyPct": weekly_pct
+        "weeklyPct": weekly_pct,
+        "streakMatrix": matrix,
+        "latest": latest
+    }
+
+def main():
+    email = os.environ.get("GARMIN_EMAIL")
+    password = os.environ.get("GARMIN_PASSWORD")
+    token_dir = os.environ.get("GARMIN_TOKEN_DIR", "~/.garminconnect")
+    
+    run_target = float(os.environ.get("RUN_TARGET_MILES", 15.0))
+    walk_target = float(os.environ.get("WALK_TARGET_MILES", 20.0))
+
+    if not email or not password:
+        raise ValueError("Missing GARMIN_EMAIL or GARMIN_PASSWORD environment variables.")
+
+    garmin = Garmin(email, password)
+    try:
+        garmin.login(token_dir)
+    except Exception:
+        garmin.login()
+
+    activities = garmin.get_activities(0, 50)
+
+    # Filter into the two distinct buckets
+    runs = [
+        act for act in activities 
+        if act.get("activityType", {}).get("typeKey", "").lower() in RUN_TYPES
+    ]
+    walks = [
+        act for act in activities 
+        if act.get("activityType", {}).get("typeKey", "").lower() in WALK_TYPES
+    ]
+
+    now = datetime.now(timezone.utc)
+    today = now.date()
+    start_of_week = today - timedelta(days=today.weekday())
+
+    stats_payload = {
+        "runs": build_category_metrics(runs, today, start_of_week, run_target),
+        "walks": build_category_metrics(walks, today, start_of_week, walk_target),
+        "lastSynced": now.isoformat()
+    }
+
+    output_path = os.environ.get("OUTPUT_PATH", "garmin-stats.json")
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(stats_payload, f, indent=2)
+
+    print(f"Stats written to {output_path} successfully.")
+
+if __name__ == "__main__":
+    main()
