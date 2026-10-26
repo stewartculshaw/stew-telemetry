@@ -1,0 +1,73 @@
+{
+  "streakDays": 1,
+  "weeklyMiles": 3.2,
+  "weeklyTarget": 15.0,
+  "weeklyPct": 21,
+  "streakMatrix": [
+    {
+      "date": "2026-10-13",
+      "active": false
+    },
+    {
+      "date": "2026-10-14",
+      "active": false
+    },
+    {
+      "date": "2026-10-15",
+      "active": false
+    },
+    {
+      "date": "2026-10-16",
+      "active": false
+    },
+    {
+      "date": "2026-10-17",
+      "active": false
+    },
+    {
+      "date": "2026-10-18",
+      "active": false
+    },
+    {
+      "date": "2026-10-19",
+      "active": false
+    },
+    {
+      "date": "2026-10-20",
+      "active": false
+    },
+    {
+      "date": "2026-10-21",
+      "active": false
+    },
+    {
+      "date": "2026-10-22",
+      "active": false
+    },
+    {
+      "date": "2026-10-23",
+      "active": false
+    },
+    {
+      "date": "2026-10-24",
+      "active": false
+    },
+    {
+      "date": "2026-10-25",
+      "active": false
+    },
+    {
+      "date": "2026-10-26",
+      "active": true
+    }
+  ],
+  "latestRun": {
+    "name": "Wigan Run",
+    "relativeDate": "Today",
+    "distanceMiles": 3.2,
+    "pace": "9'42\"",
+    "duration": "31:14",
+    "avgHr": 153
+  },
+  "lastSynced": "2026-10-26T15:45:01.057375+00:00"
+}
