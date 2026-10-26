@@ -40,6 +40,7 @@ def build_category_metrics(activities, today, start_of_week, weekly_target):
         if act_date >= start_of_week:
             week_distance_meters += act.get("distance", 0.0)
 
+    # 14-day history array (oldest to newest)
     matrix = []
     for i in range(13, -1, -1):
         day = today - timedelta(days=i)
@@ -48,6 +49,7 @@ def build_category_metrics(activities, today, start_of_week, weekly_target):
             "active": (day in active_dates)
         })
 
+    # Consecutive streak count
     streak = 0
     check_day = today
     if check_day not in active_dates:
@@ -56,6 +58,7 @@ def build_category_metrics(activities, today, start_of_week, weekly_target):
         streak += 1
         check_day -= timedelta(days=1)
 
+    # Latest activity details
     latest = None
     if activities:
         recent = activities[0]
@@ -165,6 +168,7 @@ def main():
 
     activities = garmin.get_activities(0, 50)
 
+    # Filter into the two distinct buckets
     runs = [
         act for act in activities 
         if act.get("activityType", {}).get("typeKey", "").lower() in RUN_TYPES
@@ -178,18 +182,33 @@ def main():
     today = now.date()
     start_of_week = today - timedelta(days=today.weekday())
 
+    output_path = os.environ.get("OUTPUT_PATH", "garmin-stats.json")
+
+    # Load existing archive so older blog-linked workouts persist
+    archived_activities = {}
+    if os.path.exists(output_path):
+        try:
+            with open(output_path, "r", encoding="utf-8") as f:
+                existing_payload = json.load(f)
+                archived_activities = existing_payload.get("activities", {})
+        except Exception:
+            archived_activities = {}
+
+    # Merge newly fetched activities into the permanent index
+    fresh_activities = build_activity_index(activities)
+    archived_activities.update(fresh_activities)
+
     stats_payload = {
         "runs": build_category_metrics(runs, today, start_of_week, run_target),
         "walks": build_category_metrics(walks, today, start_of_week, walk_target),
-        "activities": build_activity_index(activities),
+        "activities": archived_activities,
         "lastSynced": now.isoformat()
     }
 
-    output_path = os.environ.get("OUTPUT_PATH", "garmin-stats.json")
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(stats_payload, f, indent=2)
 
-    print(f"Stats and activity index written to {output_path} successfully.")
+    print(f"Stats and {len(archived_activities)} activities written to {output_path} successfully.")
 
 if __name__ == "__main__":
     main()
