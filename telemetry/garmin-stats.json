@@ -1,73 +1,149 @@
 {
-  "streakDays": 1,
-  "weeklyMiles": 3.2,
-  "weeklyTarget": 15.0,
-  "weeklyPct": 21,
-  "streakMatrix": [
-    {
-      "date": "2026-10-13",
-      "active": false
-    },
-    {
-      "date": "2026-10-14",
-      "active": false
-    },
-    {
-      "date": "2026-10-15",
-      "active": false
-    },
-    {
-      "date": "2026-10-16",
-      "active": false
-    },
-    {
-      "date": "2026-10-17",
-      "active": false
-    },
-    {
-      "date": "2026-10-18",
-      "active": false
-    },
-    {
-      "date": "2026-10-19",
-      "active": false
-    },
-    {
-      "date": "2026-10-20",
-      "active": false
-    },
-    {
-      "date": "2026-10-21",
-      "active": false
-    },
-    {
-      "date": "2026-10-22",
-      "active": false
-    },
-    {
-      "date": "2026-10-23",
-      "active": false
-    },
-    {
-      "date": "2026-10-24",
-      "active": false
-    },
-    {
-      "date": "2026-10-25",
-      "active": false
-    },
-    {
-      "date": "2026-10-26",
-      "active": true
+  "runs": {
+    "streakDays": 1,
+    "weeklyMiles": 3.2,
+    "weeklyTarget": 15.0,
+    "weeklyPct": 21,
+    "streakMatrix": [
+      {
+        "date": "2026-10-13",
+        "active": false
+      },
+      {
+        "date": "2026-10-14",
+        "active": false
+      },
+      {
+        "date": "2026-10-15",
+        "active": false
+      },
+      {
+        "date": "2026-10-16",
+        "active": false
+      },
+      {
+        "date": "2026-10-17",
+        "active": false
+      },
+      {
+        "date": "2026-10-18",
+        "active": false
+      },
+      {
+        "date": "2026-10-19",
+        "active": false
+      },
+      {
+        "date": "2026-10-20",
+        "active": false
+      },
+      {
+        "date": "2026-10-21",
+        "active": false
+      },
+      {
+        "date": "2026-10-22",
+        "active": false
+      },
+      {
+        "date": "2026-10-23",
+        "active": false
+      },
+      {
+        "date": "2026-10-24",
+        "active": false
+      },
+      {
+        "date": "2026-10-25",
+        "active": false
+      },
+      {
+        "date": "2026-10-26",
+        "active": true
+      }
+    ],
+    "latest": {
+      "name": "Wigan Run",
+      "type": "Running",
+      "relativeDate": "Today",
+      "distanceMiles": 3.2,
+      "pace": "9'42\"",
+      "duration": "31:14",
+      "avgHr": 153
     }
-  ],
-  "latestRun": {
-    "name": "Wigan Run",
-    "relativeDate": "Today",
-    "distanceMiles": 3.2,
-    "pace": "9'42\"",
-    "duration": "31:14",
-    "avgHr": 153
   },
-  "lastSynced": "2026-10-26T15:56:21.887897+00:00"
+  "walks": {
+    "streakDays": 1,
+    "weeklyMiles": 0.0,
+    "weeklyTarget": 20.0,
+    "weeklyPct": 0,
+    "streakMatrix": [
+      {
+        "date": "2026-10-13",
+        "active": true
+      },
+      {
+        "date": "2026-10-14",
+        "active": true
+      },
+      {
+        "date": "2026-10-15",
+        "active": false
+      },
+      {
+        "date": "2026-10-16",
+        "active": true
+      },
+      {
+        "date": "2026-10-17",
+        "active": false
+      },
+      {
+        "date": "2026-10-18",
+        "active": false
+      },
+      {
+        "date": "2026-10-19",
+        "active": false
+      },
+      {
+        "date": "2026-10-20",
+        "active": false
+      },
+      {
+        "date": "2026-10-21",
+        "active": false
+      },
+      {
+        "date": "2026-10-22",
+        "active": false
+      },
+      {
+        "date": "2026-10-23",
+        "active": false
+      },
+      {
+        "date": "2026-10-24",
+        "active": false
+      },
+      {
+        "date": "2026-10-25",
+        "active": true
+      },
+      {
+        "date": "2026-10-26",
+        "active": false
+      }
+    ],
+    "latest": {
+      "name": "Wigan Walk",
+      "type": "Walking",
+      "relativeDate": "Yesterday",
+      "distanceMiles": 4.3,
+      "pace": "17'51\"",
+      "duration": "76:40",
+      "avgHr": 109
+    }
+  },
+  "lastSynced": "2026-10-26T16:13:00.287717+00:00"
 }
