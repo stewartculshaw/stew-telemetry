@@ -93,10 +93,10 @@
     }
   },
   "walks": {
-    "streakDays": 0,
-    "weeklyMiles": 0.0,
+    "streakDays": 1,
+    "weeklyMiles": 4.2,
     "weeklyTarget": 20.0,
-    "weeklyPct": 0,
+    "weeklyPct": 21,
     "streakMatrix": [
       {
         "date": "2026-10-26",
@@ -170,22 +170,33 @@
       },
       {
         "date": "2026-11-09",
-        "active": false,
+        "active": true,
         "isToday": true
       }
     ],
     "latest": {
-      "activityId": "24986667824",
+      "activityId": "25019504396",
       "name": "Wigan Walk",
       "type": "Walking",
-      "relativeDate": "3 days ago",
+      "relativeDate": "Today",
       "distanceMiles": 4.2,
-      "pace": "17'05\"",
-      "duration": "72:34",
-      "avgHr": 104
+      "pace": "16'34\"",
+      "duration": "69:46",
+      "avgHr": 103
     }
   },
   "activities": {
+    "25019504396": {
+      "id": "25019504396",
+      "name": "Wigan Walk",
+      "type": "Walking",
+      "date": "09 Nov 2026",
+      "distanceMiles": 4.21,
+      "pace": "16'34\"",
+      "duration": "69:46",
+      "avgHr": 103,
+      "elevationGainFt": 267
+    },
     "25005257699": {
       "id": "25005257699",
       "name": "Wigan Run",
@@ -724,18 +735,7 @@
       "duration": "75:10",
       "avgHr": 103,
       "elevationGainFt": 265
-    },
-    "23378916270": {
-      "id": "23378916270",
-      "name": "Wigan Walk",
-      "type": "Walking",
-      "date": "25 Jun 2026",
-      "distanceMiles": 1.8,
-      "pace": "20'37\"",
-      "duration": "37:09",
-      "avgHr": 106,
-      "elevationGainFt": 118
     }
   },
-  "lastSynced": "2026-11-09T08:52:09.176432+00:00"
+  "lastSynced": "2026-11-09T20:17:32.160992+00:00"
 }
