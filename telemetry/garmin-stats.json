@@ -93,6 +93,11 @@
       {
         "date": "2026-11-12",
         "active": false,
+        "isToday": false
+      },
+      {
+        "date": "2026-11-13",
+        "active": false,
         "isToday": true
       }
     ],
@@ -100,7 +105,7 @@
       "activityId": "25005257699",
       "name": "Wigan Run",
       "type": "Running",
-      "relativeDate": "4 days ago",
+      "relativeDate": "5 days ago",
       "distanceMiles": 2.1,
       "pace": "9'05\"",
       "duration": "18:44",
@@ -201,6 +206,11 @@
       {
         "date": "2026-11-12",
         "active": true,
+        "isToday": false
+      },
+      {
+        "date": "2026-11-13",
+        "active": false,
         "isToday": true
       }
     ],
@@ -208,7 +218,7 @@
       "activityId": "25054316544",
       "name": "Wigan Walk",
       "type": "Walking",
-      "relativeDate": "Today",
+      "relativeDate": "Yesterday",
       "distanceMiles": 4.2,
       "pace": "16'46\"",
       "duration": "70:32",
@@ -767,5 +777,5 @@
       "elevationGainFt": 271
     }
   },
-  "lastSynced": "2026-11-12T21:58:09.609865+00:00"
+  "lastSynced": "2026-11-13T02:23:24.413831+00:00"
 }
